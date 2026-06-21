@@ -24,7 +24,7 @@ def create_car(request):
             return redirect('list')
     else:
         form = CarForm()
-    return render(request,'car/create_car.html',{'form':form})
+    return render(request,'accounts/create_car.html',{'form':form})
 
 def read_car(request, pk):
     car = Car.objects.get(pk=pk)
@@ -35,4 +35,4 @@ def update_car(request, pk):
     car = Car.objects.get(pk=pk)
     if request.method == 'POST':
         form = CarForm(request,POST)
-    return render(request,'car/update_car.html',{'car':car})
+    return render(request,'accounts/update_car.html',{'car':car})

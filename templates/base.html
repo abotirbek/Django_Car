@@ -182,9 +182,13 @@ body {
             <a href="{% url 'list' %}" class="active">Home</a>
         </li>
 
-        <li>
-            <a href="{% url 'create_car' %}">Create</a>
-        </li>
+        {% if user.is_authenticated %}
+            <li>
+                <a href="{% url 'create_car' %}">Create</a>
+            </li>
+        {% else %}
+
+        {% endif %}
 
         <li class="dropdown">
             <button class="filter-btn">Filter</button>
