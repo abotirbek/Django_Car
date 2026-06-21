@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Car Shop</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Inter", sans-serif;
+    background: #f8fafc;
+}
+
+/* Navbar */
+.navbar {
+    height: 72px;
+    padding: 0 40px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+
+    border-bottom: 1px solid #edf2f7;
+    box-shadow: 0 6px 20px rgba(15,23,42,.05);
+
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
+
+/* Left menu */
+.navbar-menu {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    gap: 14px;
+}
+
+/* Right section */
+.navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+/* Links & buttons */
+.navbar-menu a,
+.filter-btn,
+.navbar-right a {
+    position: relative;
+
+    border: none;
+    background: transparent;
+    text-decoration: none;
+
+    color: #475569;
+    font-size: 15px;
+    font-weight: 500;
+
+    padding: 10px 16px;
+    border-radius: 10px;
+
+    cursor: pointer;
+    transition: .25s ease;
+}
+
+.navbar-menu a:hover,
+.navbar-right a:hover,
+.filter-btn:hover {
+    background: #f1f5f9;
+    color: #2563eb;
+}
+
+/* Active link */
+.navbar-menu a.active {
+    color: #2563eb;
+}
+
+.navbar-menu a.active::after {
+    content: "";
+    position: absolute;
+    left: 16px;
+    right: 16px;
+    bottom: 4px;
+    height: 2px;
+    background: #2563eb;
+    border-radius: 10px;
+}
+
+/* Dropdown */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-content {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+
+    min-width: 210px;
+
+    background: white;
+    border-radius: 14px;
+    border: 1px solid #eef2f7;
+
+    box-shadow: 0 12px 30px rgba(0,0,0,.08);
+
+    overflow: hidden;
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(8px);
+
+    transition: .25s ease;
+
+    z-index: 1000;
+}
+
+.dropdown:hover .dropdown-content {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-content a {
+    display: block;
+    padding: 13px 18px;
+    color: #475569;
+    transition: .2s ease;
+}
+
+.dropdown-content a:hover {
+    background: #f8fafc;
+    color: #2563eb;
+    padding-left: 24px;
+}
+
+/* Avatar */
+.avatar {
+    width: 42px;
+    height: 42px;
+
+    border-radius: 50%;
+    object-fit: cover;
+
+    border: 2px solid #e2e8f0;
+
+    transition: .25s ease;
+}
+
+.avatar:hover {
+    transform: scale(1.06);
+    border-color: #2563eb;
+}
+
+/* Auth block alignment */
+.auth-links {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+</style>
+
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <!-- LEFT -->
+    <ul class="navbar-menu">
+
+        <li>
+            <a href="{% url 'list' %}" class="active">Home</a>
+        </li>
+
+        <li>
+            <a href="{% url 'create_car' %}">Create</a>
+        </li>
+
+        <li class="dropdown">
+            <button class="filter-btn">Filter</button>
+
+            <div class="dropdown-content">
+                <a href="#">1</a>
+                <a href="#">2</a>
+                <a href="#">3</a>
+                <a href="#">4</a>
+            </div>
+        </li>
+
+    </ul>
+
+    <!-- RIGHT -->
+    <div class="navbar-right">
+
+        {% if user.is_authenticated %}
+            <div class="auth-links">
+                <a href="{% url 'profile' %}">Profile</a>
+                <a href="{% url 'logout' %}">Logout</a>
+            </div>
+        {% else %}
+            <div class="auth-links">
+                <a href="{% url 'login' %}">Login</a>
+                <a href="{% url 'register' %}">Register</a>
+            </div>
+        {% endif %}
+
+    </div>
+
+</nav>
+
+{% block content %}
+{% endblock %}
+
+</body>
+</html>

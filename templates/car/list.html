@@ -1,0 +1,197 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+    body {
+        background: #f8fafc;
+    }
+
+    .teachers-title {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #0f172a;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .header-bar {
+        max-width: 1100px;
+        margin: 60px auto 20px auto;
+        padding: 0 20px;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .teachers-container {
+        max-width: 1100px;
+        margin: 60px auto;
+        padding: 0 20px;
+    }
+
+    .page-title {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #0f172a;
+        text-align: center;
+        margin-bottom: 8px;
+    }
+
+    .page-subtitle {
+        text-align: center;
+        color: #64748b;
+        margin-bottom: 30px;
+        font-size: 0.95rem;
+    }
+
+    .teacher-list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .teacher-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 14px;
+
+        padding: 16px 18px;
+
+        transition: all 0.2s ease;
+    }
+
+    .teacher-row:hover {
+        background: #f8fafc;
+        border-color: #cbd5e1;
+    }
+
+    .teacher-info {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+    }
+
+    .teacher-name {
+        font-size: 1.05rem;
+        font-weight: 600;
+        color: #0f172a;
+    }
+
+    .teacher-meta {
+        font-size: 0.85rem;
+        color: #64748b;
+    }
+
+    .teacher-actions {
+        display: flex;
+        gap: 10px;
+    }
+
+    .action-link {
+        text-decoration: none;
+        padding: 9px 12px;
+        border-radius: 10px;
+
+        font-size: 0.85rem;
+        font-weight: 600;
+
+        transition: all 0.2s ease;
+        white-space: nowrap;
+        border: 1px solid transparent;
+    }
+
+    .edit-link {
+        background: #2563eb;
+        color: #ffffff;
+    }
+
+    .edit-link:hover {
+        background: #1d4ed8;
+    }
+
+    .read-link {
+        background: #f1f5f9;
+        color: #0f172a;
+        border: 1px solid #e2e8f0;
+    }
+
+    .read-link:hover {
+        background: #e2e8f0;
+    }
+
+    .delete-link {
+        background: #fee2e2;
+        color: #991b1b;
+        border: 1px solid #fecaca;
+    }
+
+    .delete-link:hover {
+        background: #fecaca;
+    }
+
+    @media (max-width: 640px) {
+        .teacher-row {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .teacher-actions {
+            width: 100%;
+        }
+
+        .action-link {
+            flex: 1;
+            text-align: center;
+        }
+    }
+</style>
+
+<div class="teachers-container">
+
+    <h1 class="teachers-title">Our Cars</h1>
+
+    <div class="teacher-list">
+
+        {% for car in cars %}
+        <div class="teacher-row">
+
+            <div class="teacher-info">
+                <div class="teacher-name">
+                    {{ car.brand }} {{ car.model }}
+                </div>
+
+                <div class="teacher-meta">
+                    ${{ car.price }}
+                </div>
+            </div>
+
+            <div class="teacher-actions">
+                <a href="#" class="action-link edit-link">
+                    Edit
+                </a>
+
+                <a href="{% url 'read_car' car.pk %}" class="action-link read-link">
+                    View
+                </a>
+
+                <a href="#" class="action-link delete-link">
+                    Delete
+                </a>
+            </div>
+
+        </div>
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}
